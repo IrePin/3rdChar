@@ -23,17 +23,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: T_grass_type_02_BC
-  m_Shader: {fileID: 4800000, guid: adce0b63bca75a84e9f786201b7d7b0b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 3d530807e37728e47a18b52b302deafc,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
+  - _DISABLE_DECALS
+  - _DISABLE_SSR
   - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
-  m_InvalidKeywords:
-  - _ALPHAPREMULTIPLY_ON
-  m_LightmapFlags: 2
-  m_EnableInstancingVariants: 1
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2475
+  m_CustomRenderQueue: 2450
   stringTagMap:
     MotionVector: User
     RenderType: TransparentCutout
@@ -43,6 +47,7 @@ Material:
   - TransparentBackface
   - RayTracingPrepass
   - MOTIONVECTORS
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -74,6 +79,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _ExtraTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: cfc09f5b682d1674398e37a50362c6d0, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -95,6 +104,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubsurfaceTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -133,6 +146,8 @@ Material:
     - _AlphaToMaskInspectorValue: 0
     - _AmbientOcclusionPower: 1
     - _BackFaceMirrorNormal: 0
+    - _BillboardKwToggle: 0
+    - _BillboardShadowFade: 0.5
     - _BlendMode: 0
     - _BumpScale: 1
     - _ColorNoiseSpread: 15
@@ -147,25 +162,27 @@ Material:
     - _DetailNormalMapScale: 1
     - _DiffusionProfileHash: 3.079105
     - _DoubleSidedEnable: 1
-    - _DoubleSidedGIMode: 0
-    - _DoubleSidedNormalMode: 1
+    - _DoubleSidedGIMode: 1
+    - _DoubleSidedNormalMode: 0
     - _Drag: 1
     - _DstBlend: 0
-    - _EnableBlendModePreserveSpecularLighting: 1
+    - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _HeightDrag: 0
+    - _HueVariationKwToggle: 0
     - _InitialBend: 1
     - _Metallic: 0
     - _Mode: 3
-    - _NormalScale: 1
+    - _NormalMapKwToggle: 0
+    - _NormalScale: 8
     - _OcclusionStrength: 1
     - _OpaqueCullMode: 2
     - _Parallax: 0.02
     - _RayTracing: 0
-    - _ReceivesSSR: 1
+    - _ReceivesSSR: 0
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
     - _RenderQueueType: 1
@@ -180,17 +197,19 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 8
+    - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 10
-    - _StencilRefMV: 40
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 32
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _Stiffness: 1
-    - _SupportDecals: 1
+    - _SubsurfaceIndirect: 0.25
+    - _SubsurfaceKwToggle: 0
+    - _SupportDecals: 0
     - _SurfaceType: 0
     - _Thickness: 0.789
     - _TouchReactActive: 0
@@ -201,11 +220,15 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
+    - _TwoSided: 2
     - _UVSec: 0
     - _UseShadowThreshold: 1
+    - _Vector1_22E2EE62: 1
+    - _Vector1_E56689AB: 1.5
     - _WINDCOLORMIX: 0
     - _WindColorThreshold: 1
     - _WindNormalInfluence: 0
+    - _WindQuality: 0
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
@@ -213,12 +236,31 @@ Material:
     - __dirty: 1
     m_Colors:
     - _Color: {r: 0.588, g: 0.588, b: 0.588, a: 1}
-    - _DiffusionProfileAsset: {r: -7.1912784e+34, g: 1.5250164e+22, b: 0.000001157826, a: 6.643526e-13}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
-    - _DryColor: {r: 0.66833705, g: 0.9433962, b: 0.4672481, a: 1}
+    - _DiffusionProfileAsset: {r: -7.1912784e+34, g: 1.5250164e+22, b: 0.000001157826,
+        a: 6.643526e-13}
+    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
+    - _DryColor: {r: 0, g: 1, b: 0.19851398, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HealthyColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HealthyColor: {r: 0.54005057, g: 0.8207547, b: 0.36779103, a: 1}
+    - _HueVariationColor: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _NewNormal: {r: 1, g: 1, b: 1, a: 0}
+    - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
     - _TilingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _WindColorInfluence: {r: 0.2, g: 0.2, b: 0.2, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &5471187921126530588
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 12
+  hdPluginSubTargetMaterialVersions:
+    m_Keys: []
+    m_Values: 
