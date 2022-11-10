@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 12956.828, g: 15223.484, b: 19743.875, a: 1}
+  m_IndirectSpecularColor: {r: 12938.234, g: 15205.969, b: 19732.125, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1676,7 +1676,7 @@ Camera:
   m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_SensorSize: {x: 36, y: 24}
+  m_SensorSize: {x: 70, y: 51}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 20.78461
   m_NormalizedViewPortRect:
@@ -1687,7 +1687,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 101.63423
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5075,12 +5075,12 @@ MonoBehaviour:
   settings:
     CharacterRotationSmoothdamp: 0.2
     WalkingSpeed: 1.54
-    RunningSpeed: 3.65
+    RunningSpeed: 2.2
     WalkingBackwardSpeed: 1.04
-    RunningBackwardSpeed: 2.75
+    RunningBackwardSpeed: 1.5
     WalkingStrafingSpeed: 1.53
     RunningStrafingSpeed: 4
-    SprintingSpeed: 4.66
+    SprintingSpeed: 3
     JumpingForce: 500
   isTargetMode: 0
   cameraTarget: {fileID: 1995379520}
