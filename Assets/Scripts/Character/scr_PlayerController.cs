@@ -23,7 +23,7 @@ public class scr_PlayerController : MonoBehaviour
 
     [Header("Movement")]
     public float movementSpeedOffset = 1;
-    public float movementSmoothdamp = 0.3f; 
+    public float movementSmoothdamp = 0.3f;
     public bool isWalking;
     [HideInInspector]
     public bool isSprinting;
@@ -42,7 +42,9 @@ public class scr_PlayerController : MonoBehaviour
     public PlayerStatsModel playerStats;
 
     [Header("Gravity")]
+    public Transform groundCheck;
     public float gravity = 10;
+    public float groundDistance = 0.4f;
     public LayerMask groundMask;
     private Vector3 gravityDirection;
 
@@ -54,6 +56,9 @@ public class scr_PlayerController : MonoBehaviour
     public float fallingRunningMovementSpeed;
     private bool jumpingTriggered;
     private bool fallingTriggered;
+    public float maxFallingMovement;
+
+
 
     #region - Awake -
 
@@ -88,9 +93,13 @@ public class scr_PlayerController : MonoBehaviour
 
         jumpingTriggered = true;
 
-        if (IsMoving() && !isWalking)
+        if (IsMoving() && IsInputMoving() && !isWalking)
         {
             characterAnimator.SetTrigger("RunningJump");
+        }
+        else if (IsMoving() && IsInputMoving() && isWalking)
+        {
+            characterAnimator.SetTrigger("WalkingJump");
         }
         else
         {
@@ -189,7 +198,8 @@ public class scr_PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        if (Physics.CheckSphere(transform.position, 0.2f, groundMask))
+
+        if (Physics.CheckSphere(groundCheck.position, groundDistance, groundMask))
         {
             return true;
         }
@@ -276,6 +286,7 @@ public class scr_PlayerController : MonoBehaviour
             return true;
         }
 
+
         if (input_Movement.y > 0.2f || input_Movement.y < -0.2f)
         {
             return true;
@@ -351,6 +362,11 @@ public class scr_PlayerController : MonoBehaviour
         {
             playerMovement = cameraController.transform.forward * verticalSpeed;
             playerMovement += cameraController.transform.right * horizontalSpeed;
+        }
+        else if (!IsInputMoving())
+        {
+            playerMovement = Vector3.zero;
+            characterRigidBody.freezeRotation = true;
         }
 
         if (jumpingTriggered || IsFalling())
