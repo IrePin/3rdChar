@@ -58,12 +58,28 @@ public class scr_PlayerController : MonoBehaviour
     private bool fallingTriggered;
     public float maxFallingMovement;
 
+    private Vector3 cameraRelativeForward;
+    private Vector3 cameraRelativeRight;
 
+    [Header("Combat")]
+    public bool isFaceTarget;
+    public Transform target;
+    [HideInInspector]
+    public bool isAtacking;
+    public float distanceToTarget = 1;
+    public float speedToTarget = 1;
+    public float combatCooldown = 2;
+    private float currentCombatCooldown;
+
+    private float fire1Timer;
 
     #region - Awake -
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
         characterRigidBody = GetComponent<Rigidbody>();
         characterAnimator = GetComponent<Animator>();
 
@@ -76,6 +92,9 @@ public class scr_PlayerController : MonoBehaviour
 
         playerInputActions.Actions.WalkingToggle.performed += x => ToggleWalking();
         playerInputActions.Actions.Sprint.performed += x => Sprint();
+
+        playerInputActions.Actions.Fire1.performed += x => Fire1();
+        playerInputActions.Actions.Fire1Hold.performed += x => Fire1Hold();
 
         gravityDirection = Vector3.down;
     }
@@ -313,6 +332,33 @@ public class scr_PlayerController : MonoBehaviour
             }
 
             targetHorizontalSpeed = (isWalking ? settings.WalkingStrafingSpeed : settings.RunningStrafingSpeed);
+
+            if (isFaceTarget && target)
+            {
+                var lookDirection = target.position - transform.position;
+                lookDirection.y = 0;
+
+                var currentRotation = transform.rotation;
+
+                transform.LookAt(lookDirection + transform.position, Vector3.up);
+                var newRotation = transform.rotation;
+
+                transform.rotation = Quaternion.Lerp(currentRotation, newRotation, settings.CharacterRotationSmoothdamp);
+
+            }
+            else
+            {
+                var currentRotation = transform.rotation;
+
+                var newRotation = currentRotation.eulerAngles;
+
+                newRotation.y = cameraController.targetRotation.y;
+
+                currentRotation = Quaternion.Lerp(currentRotation, Quaternion.Euler(newRotation), settings.CharacterRotationSmoothdamp);
+
+                transform.rotation = currentRotation;
+            }
+
         }
         else
         {
@@ -345,8 +391,10 @@ public class scr_PlayerController : MonoBehaviour
 
         if (isTargetMode)
         {
-            characterAnimator.SetFloat("Vertical", verticalSpeed);
-            characterAnimator.SetFloat("Horizontal", horizontalSpeed);
+            var relativeMovement = transform.InverseTransformDirection(playerMovement);
+
+            characterAnimator.SetFloat("Vertical", relativeMovement.z);
+            characterAnimator.SetFloat("Horizontal", relativeMovement.x);
         }
         else
         {
@@ -360,14 +408,25 @@ public class scr_PlayerController : MonoBehaviour
 
         if (IsInputMoving())
         {
-            playerMovement = cameraController.transform.forward * verticalSpeed;
-            playerMovement += cameraController.transform.right * horizontalSpeed;
+            cameraRelativeForward = cameraController.transform.forward;
+            cameraRelativeRight = cameraController.transform.right;
         }
-        else if (!IsInputMoving())
-        {
-            playerMovement = Vector3.zero;
-            characterRigidBody.freezeRotation = true;
-        }
+
+         playerMovement = cameraRelativeForward * verticalSpeed;
+         playerMovement += cameraRelativeRight * horizontalSpeed;
+
+
+
+        //if (IsInputMoving())
+        //{
+        //    playerMovement = cameraController.transform.forward * verticalSpeed;
+        //    playerMovement += cameraController.transform.right * horizontalSpeed;
+        //}
+        //else if (!IsInputMoving())
+        //{
+        //    playerMovement = Vector3.zero;
+        //    characterRigidBody.freezeRotation = true;
+        //}
 
         if (jumpingTriggered || IsFalling())
         {
@@ -378,6 +437,91 @@ public class scr_PlayerController : MonoBehaviour
         {
             characterAnimator.applyRootMotion = true;
         }
+
+        if (isAtacking && IsGrounded() && isTargetMode)
+        {
+            isFaceTarget = true;
+
+            if(Vector3.Distance(transform.position, target.transform.position) > distanceToTarget)
+            {
+                characterRigidBody.AddRelativeForce(Vector3.forward * speedToTarget, ForceMode.Force);
+            }
+        }
+        //else
+        //{
+        //    isFaceTarget = false;
+        //}
+    }
+
+    #endregion
+
+    #region - Combat -
+
+    public void Fire1()
+    {
+       
+
+        if (!isAtacking && IsGrounded() && !jumpingTriggered)
+        {
+            if (fire1Timer <= 0)
+            {
+                fire1Timer = 0.4f;
+                return;
+            }
+
+            StartAtacking();
+            characterAnimator.SetTrigger("MeleePunch1");
+            Debug.Log("fire");
+        }
+    }
+    public void Fire1Hold()
+    {
+        if (IsGrounded() && !jumpingTriggered)
+        {
+            StartAtacking();
+            characterAnimator.SetTrigger("MeleeHook1");
+            Debug.Log("fire");
+        }
+    }
+
+    public void CalculateCombat()
+    {
+        if(fire1Timer >= 0)
+        {
+            fire1Timer -= Time.deltaTime;
+        }
+
+        if(currentCombatCooldown < 0)
+        {
+            currentCombatCooldown -= Time.deltaTime;
+        }
+        else
+        {
+            isTargetMode = false;
+        }
+
+        if (IsFalling())
+        {
+            isTargetMode = false;
+            isAtacking = false;
+        }
+
+    }
+
+    #endregion
+
+    #region - Events -
+
+    public void StartAtacking()
+    {
+        isAtacking = true;
+        isTargetMode = true;
+    }
+
+    public void FinishAtacking()
+    {
+        currentCombatCooldown = combatCooldown;
+        isAtacking = false;
     }
 
     #endregion
@@ -390,6 +534,7 @@ public class scr_PlayerController : MonoBehaviour
         CalculateFalling();
         Movement();
         CalculateSprint();
+        CalculateCombat();
     }
 
     #endregion

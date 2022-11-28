@@ -145,6 +145,51 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""e45f1b12-29c9-4c9a-bbaa-c06a7257afd7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire1"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d2262ee-a70c-41bc-ae02-6b8536d1c7a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire1Hold"",
+                    ""type"": ""Button"",
+                    ""id"": ""6be400ca-3a15-452d-9954-31b05342dd90"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Kick1"",
+                    ""type"": ""Button"",
+                    ""id"": ""a96ec476-1516-4d87-9663-de61b8b2943a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KickHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""267f33d9-f97a-4e6c-8f2c-4c0f7284efc8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -180,6 +225,61 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7164b819-7bd4-4462-9787-e9af4c9b6ade"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3a19219-50a9-4619-b3c1-39353c055e26"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""710f5905-eea6-4ac7-ad1d-a363787eb79a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire1Hold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""babad3db-dd3d-4c8e-8501-730e925961d1"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Kick1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd089213-6fdb-452a-9ce1-516e9c6ed9c5"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KickHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -195,6 +295,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Actions_Jump = m_Actions.FindAction("Jump", throwIfNotFound: true);
         m_Actions_WalkingToggle = m_Actions.FindAction("WalkingToggle", throwIfNotFound: true);
         m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
+        m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
+        m_Actions_Fire1 = m_Actions.FindAction("Fire1", throwIfNotFound: true);
+        m_Actions_Fire1Hold = m_Actions.FindAction("Fire1Hold", throwIfNotFound: true);
+        m_Actions_Kick1 = m_Actions.FindAction("Kick1", throwIfNotFound: true);
+        m_Actions_KickHold = m_Actions.FindAction("KickHold", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -298,6 +403,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Jump;
     private readonly InputAction m_Actions_WalkingToggle;
     private readonly InputAction m_Actions_Sprint;
+    private readonly InputAction m_Actions_Interact;
+    private readonly InputAction m_Actions_Fire1;
+    private readonly InputAction m_Actions_Fire1Hold;
+    private readonly InputAction m_Actions_Kick1;
+    private readonly InputAction m_Actions_KickHold;
     public struct ActionsActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -305,6 +415,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Actions_Jump;
         public InputAction @WalkingToggle => m_Wrapper.m_Actions_WalkingToggle;
         public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
+        public InputAction @Interact => m_Wrapper.m_Actions_Interact;
+        public InputAction @Fire1 => m_Wrapper.m_Actions_Fire1;
+        public InputAction @Fire1Hold => m_Wrapper.m_Actions_Fire1Hold;
+        public InputAction @Kick1 => m_Wrapper.m_Actions_Kick1;
+        public InputAction @KickHold => m_Wrapper.m_Actions_KickHold;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -323,6 +438,21 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Interact.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteract;
+                @Fire1.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnFire1;
+                @Fire1.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnFire1;
+                @Fire1.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnFire1;
+                @Fire1Hold.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnFire1Hold;
+                @Fire1Hold.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnFire1Hold;
+                @Fire1Hold.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnFire1Hold;
+                @Kick1.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnKick1;
+                @Kick1.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnKick1;
+                @Kick1.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnKick1;
+                @KickHold.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnKickHold;
+                @KickHold.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnKickHold;
+                @KickHold.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnKickHold;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -336,6 +466,21 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Fire1.started += instance.OnFire1;
+                @Fire1.performed += instance.OnFire1;
+                @Fire1.canceled += instance.OnFire1;
+                @Fire1Hold.started += instance.OnFire1Hold;
+                @Fire1Hold.performed += instance.OnFire1Hold;
+                @Fire1Hold.canceled += instance.OnFire1Hold;
+                @Kick1.started += instance.OnKick1;
+                @Kick1.performed += instance.OnKick1;
+                @Kick1.canceled += instance.OnKick1;
+                @KickHold.started += instance.OnKickHold;
+                @KickHold.performed += instance.OnKickHold;
+                @KickHold.canceled += instance.OnKickHold;
             }
         }
     }
@@ -350,5 +495,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnWalkingToggle(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+        void OnFire1(InputAction.CallbackContext context);
+        void OnFire1Hold(InputAction.CallbackContext context);
+        void OnKick1(InputAction.CallbackContext context);
+        void OnKickHold(InputAction.CallbackContext context);
     }
 }

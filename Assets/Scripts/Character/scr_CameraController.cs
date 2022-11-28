@@ -5,7 +5,8 @@ public class scr_CameraController : MonoBehaviour
 {
     [Header("References")]
     public scr_PlayerController playerController;
-    private Vector3 targetRotation;
+    [HideInInspector]
+    public Vector3 targetRotation;
     public GameObject yGimbal;
     private Vector3 yGibalRotation;
 
@@ -36,17 +37,6 @@ public class scr_CameraController : MonoBehaviour
 
         yGimbal.transform.localRotation = Quaternion.Euler(yGibalRotation);
 
-        if (playerController.isTargetMode)
-        {
-            var currentRotation = playerController.transform.rotation;
-
-            var newRotation = currentRotation.eulerAngles;
-            newRotation.y = targetRotation.y;
-
-            currentRotation = Quaternion.Lerp(currentRotation, Quaternion.Euler(newRotation), settings.CharacterRotationSmoothdamp);
-
-            playerController.transform.rotation = currentRotation;
-        }
     }
 
     private void FollowPlayerCameraTarget()
